@@ -1,0 +1,24 @@
+---
+- name: upgrade all packages
+  yum: name=* state=latest
+
+- name: install the latest version of fail2ban
+  yum: name=fail2ban state=present
+  notify:
+  - restart fail2ban
+
+- name: Make httpd readable
+  file: path=/var/log/httpd state=directory mode=744
+
+- name: Install jail
+  template: src=jail.local.j2 dest=/etc/fail2ban/jail.local force=yes
+
+- name: Install post flood filter
+  template: src=apache-postflood.conf.j2 dest=/etc/fail2ban/filter.d/apache-postflood.conf
+  notify:
+  - restart fail2ban
+  
+#- name: ensure fail2ban starts on a fresh reboot
+#  service: name=fail2ban state=started enabled=yes
+  
+  

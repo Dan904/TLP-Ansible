@@ -1,0 +1,40 @@
+---
+- hosts: Testing
+  remote_user: ec2-user
+  become: yes
+  become_method: sudo
+  vars:
+  - ec2_user: ec2-user 
+  roles:
+  - iptables
+  - fail2ban
+
+  tasks:
+ 
+# Install programs
+
+  - name: upgrade all packages
+    yum: name=* state=latest
+ 
+
+  - name: Disallow root SSH access
+    action: lineinfile dest=/etc/ssh/sshd_config regexp="^PermitRootLogin" line="PermitRootLogin no" state=present 
+    notify: Restart sshd
+
+  - name: Install rootkit detection
+    yum: name=chkrootkit state=present
+
+  - name: Install rootkit detection
+    yum: name=rkhunter state=present
+
+
+
+
+
+
+
+  handlers:
+   - name: restart sshd
+     service:
+       name: sshd 
+       state: restarted

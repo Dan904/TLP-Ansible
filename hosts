@@ -1,4 +1,4 @@
-[Live]
+[Production]
 #TLP-Uniform1_R - Dirty Melvin - Live
 52.88.17.176
 
@@ -85,9 +85,10 @@
 52.88.44.118
 
 
+[Testing]
 
-
-
+#TLP-Bravo - TLP-Testing - Staging
+54.201.141.18		 #Tmp ip changes everytime.
 
 
 

@@ -1,0 +1,22 @@
+---
+- name: Enable iptables
+  command: chkconfig iptables on
+  
+- name: Iptables Save on Stop
+  lineinfile: dest=/etc/sysconfig/iptables-config regexp='^IPTABLES_SAVE_ON_STOP' line='IPTABLES_SAVE_ON_STOP="yes"'
+
+- name: Iptables Save on Restart
+  lineinfile: dest=/etc/sysconfig/iptables-config regexp='^IPTABLES_SAVE_ON_RESTART' line='IPTABLES_SAVE_ON_RESTART="yes"'
+  
+- name: Iptables Save counter
+  lineinfile: dest=/etc/sysconfig/iptables-config regexp='^IPTABLES_SAVE_COUNTER' line='IPTABLES_SAVE_COUNTER="yes"'
+  
+- name: Copy v4 script
+  template: src=iptables.j2 dest=/etc/sysconfig/iptables
+
+
+
+- name: Save Iptables
+  command: iptables-save
+  
+  
