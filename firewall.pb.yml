@@ -6,17 +6,14 @@
   vars:
   - ec2_user: ec2-user 
   roles:
-#  - iptables
+  - iptables
   - fail2ban
 
   tasks:
- 
-# Install programs
 
   - name: upgrade all packages
     yum: name=* state=latest
  
-
   - name: Disallow root SSH access
     action: lineinfile dest=/etc/ssh/sshd_config regexp="^PermitRootLogin" line="PermitRootLogin no" state=present 
     notify: Restart sshd
@@ -26,12 +23,6 @@
 
   - name: Install rootkit detection
     yum: name=rkhunter state=present
-
-
-
-
-
-
 
   handlers:
    - name: restart sshd
