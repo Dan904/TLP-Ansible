@@ -46,8 +46,6 @@
 
 
 [Staging]
-#TLP-Kilo0 - Tight Line Productions - Staging
-52.10.214.33
 
 #TLP-Uniform1 - Dirty Melvin - Staging
 
@@ -68,17 +66,14 @@
 #TLP-November1 - Mermaid Bride - Staging
 52.27.248.3
 
-#tightline.media - TLP Website - Staging
-#52.26.135.152
-
 #TLP-Quebec1 - Blue Sky Plumbing - Staging
 52.88.44.118
 
 
 [Testing]
 
-#TLP-Bravo - TLP-Testing - Staging
-52.26.135.152	 #Tmp ip changes everytime.
+#TLP-Bravo2 - Test - Staging
+54.201.15.158	 #Tmp ip changes everytime.
 
 [Test]
 
