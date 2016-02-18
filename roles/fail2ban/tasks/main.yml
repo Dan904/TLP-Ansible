@@ -7,16 +7,40 @@
   notify:
   - restart fail2ban
 
-- name: Make httpd readable
-  file: path=/var/log/httpd state=directory mode=744
+- name: Config Fail2ban
+  lineinfile: dest=/etc/fail2ban/fail2ban.conf regexp='^logtarget' line='logtarget = /var/log/fail2ban.log'
 
-- name: Install jail
+- name: Make httpd readable
+  file: path=/var/log/httpd state=directory mode=755
+
+- name: Replace jail
   template: src=jail.local.j2 dest=/etc/fail2ban/jail.local force=yes
+  
+- name: Replace sshd.conf
+  template: src=sshd.conf.j2 dest=/etc/fail2ban/filter.d/sshd.conf force=yes
+  
+- name: Add apache-botsearch.conf
+  template: src=apache-botsearch.conf.j2 dest=/etc/fail2ban/filter.d/apache-botsearch.conf force=yes
+
+- name: Add apache-fakegooglebot.conf
+  template: src=apache-fakegooglebot.conf.j2 dest=/etc/fail2ban/filter.d/apache-fakegooglebot.conf force=yes  
+
+- name: Add apache-modsecurity.conf
+  template: src=apache-modsecurity.conf.j2 dest=/etc/fail2ban/filter.d/apache-modsecurity.conf force=yes
+  
+- name: Add apache-shellshock.conf
+  template: src=apache-shellshock.conf.j2 dest=/etc/fail2ban/filter.d/apache-shellshock.conf force=yes
+  
+- name: Add apache-pass.conf
+  template: src=apache-pass.conf.j2 dest=/etc/fail2ban/filter.d/apache-pass.conf force=yes
 
 - name: Install post flood filter
   template: src=apache-postflood.conf.j2 dest=/etc/fail2ban/filter.d/apache-postflood.conf
   notify:
   - restart fail2ban
+ 
+- name: Enable fail2ban at boot
+  command: chkconfig fail2ban on
   
 #- name: ensure fail2ban starts on a fresh reboot
 #  service: name=fail2ban state=started enabled=yes

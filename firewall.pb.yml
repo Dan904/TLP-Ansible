@@ -6,7 +6,7 @@
   vars:
   - ec2_user: ec2-user 
   roles:
-  - iptables
+#  - iptables
   - fail2ban
 
   tasks:
