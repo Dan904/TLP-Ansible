@@ -1,20 +1,20 @@
-    # Fail2Ban configuration file
-    #
-    #
-    # $Revision: 1 $
-    #
+# Fail2Ban configuration file
+#
+#
+# $Revision: 1 $
+#
 
-    [Definition]
-    # Option: failregex
-    # Notes.: Regexp to catch known spambots and software alike. Please verify
-    # that it is your intent to block IPs which were driven by
-    # abovementioned bots.
-    # Values: TEXT
-    #
-    failregex = ^ -.*”POST.*
+[Definition]
+# Option: failregex
+# Notes.: Regexp to catch known spambots and software alike. Please verify
+# that it is your intent to block IPs which were driven by
+# abovementioned bots.
+# Values: TEXT
+#
+failregex = ^ -.*”POST.*
 
-    # Option: ignoreregex
-    # Notes.: regex to ignore. If this regex matches, the line is ignored.
-    # Values: TEXT
-    #
-    ignoreregex =
+# Option: ignoreregex
+# Notes.: regex to ignore. If this regex matches, the line is ignored.
+# Values: TEXT
+#
+ignoreregex =
